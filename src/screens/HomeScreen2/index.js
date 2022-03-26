@@ -287,34 +287,7 @@ export default class HomeScreen2 extends Component {
     }
     renderDisplayView3() {
         return (
-            // <View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
-            //         <Text style={{ marginLeft: 3 }}>
-            //             <IconAntDesign name="caretleft" size={25} color='#F79122' />
-            //         </Text>
-            //         <Text style={{ color: "#F79122", fontSize: 18, fontWeight: "bold" }} >أزرار واجهة احضار فاتورة</Text>
-            //     </View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
-            //         <Text style={DisStyles.inputTitleStyle} >طباعة بلوتوث</Text>
-            //         <CheckBox style={{ marginLeft: 15 }} />
-            //     </View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
-            //         <Text style={DisStyles.inputTitleStyle} >طباعة كاشير</Text>
-            //         <CheckBox style={{ marginLeft: 15 }} />
-            //     </View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
-            //         <Text style={DisStyles.inputTitleStyle} > طباعة حسب الموقع</Text>
-            //         <CheckBox style={{ marginLeft: 15 }} />
-            //     </View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
-            //         <Text style={DisStyles.inputTitleStyle} >اغلاق الطلب</Text>
-            //         <CheckBox style={{ marginLeft: 15 }} />
-            //     </View>
-            //     <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
-            //         <Text style={DisStyles.inputTitleStyle} >الغاء الامر</Text>
-            //         <CheckBox style={{ marginLeft: 15 }} />
-            //     </View>
-            // </View>
+
             <Text style={{ textAlign: "center" }}>Diplay View 3</Text>
         );
     }
