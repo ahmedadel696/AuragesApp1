@@ -494,6 +494,8 @@ export default class HomeScreen2 extends Component {
         } else if (pressType == 'settings') {
             //this.props.navigation.navigate('set');
             this.setState({ modalSettingsVisible: true })
+        } else if (pressType == 'pos') {
+            this.props.navigation.navigate('pos');
         }
     }
 
@@ -766,14 +768,17 @@ export default class HomeScreen2 extends Component {
                         </View>
                         <View style={{ justifyContent: "center" }}>
                             <View style={styles.Rowcontainer}>
-                                <View style={styles.cardStyle}>
+                            <TouchableOpacity
+                                    style={styles.cardStyle}
+                                    onPress={() => this.handelPressView('pos')}
+                                >
                                     <Text >
                                         <IconAntDesign name="pluscircleo" size={50} color='#2B83A0' />
                                     </Text>
                                     <Text style={styles.cardTxtStyle}>
                                         نقطه البيع
                                     </Text>
-                                </View>
+                                </TouchableOpacity>
                                 <View style={styles.cardStyle}>
                                     <Text >
                                         <IconFontAwesome name="language" size={50} color='#2B83A0' />

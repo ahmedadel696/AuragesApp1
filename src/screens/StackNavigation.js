@@ -5,13 +5,13 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen2 from './HomeScreen2';
 import SettingsScreen from './SettingsScreen';
-// const Stack = createStackNavigator();
-
+import PosScreen from './PosScreen';
 
 const App = createStackNavigator(
     {
       Home: HomeScreen2,
       set : SettingsScreen,
+      pos : PosScreen,
     },
   
     {
