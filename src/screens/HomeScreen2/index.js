@@ -32,12 +32,50 @@ export default class HomeScreen2 extends Component {
             view2Press: false,
             view3Press: false,
             view4Press: false,
+
+            settings1Press: true,
+            settings2Press: false,
+            settings3Press: false,
+            settings4Press: false,
+            settings5Press: false,
+
         }
     }
 
     //edut here 16/3
     handelDisplayPressView = (pressType) => {
-        this.setState({ navType: pressType })
+        this.setState({ navType: pressType });
+        if (pressType == 'conn') {
+            this.setState({ settings1Press: true })
+            this.setState({ settings2Press: false })
+            this.setState({ settings3Press: false })
+            this.setState({ settings4Press: false })
+            this.setState({ settings5Press: false })
+        } else if (pressType == 'err') {
+            this.setState({ settings1Press: false })
+            this.setState({ settings2Press: true })
+            this.setState({ settings3Press: false })
+            this.setState({ settings4Press: false })
+            this.setState({ settings5Press: false })
+        } else if (pressType == 'display') {
+            this.setState({ settings1Press: false })
+            this.setState({ settings2Press: false })
+            this.setState({ settings3Press: true })
+            this.setState({ settings4Press: false })
+            this.setState({ settings5Press: false })
+        } else if (pressType == 'orders') {
+            this.setState({ settings1Press: false })
+            this.setState({ settings2Press: false })
+            this.setState({ settings3Press: false })
+            this.setState({ settings4Press: true })
+            this.setState({ settings5Press: false })
+        } else if (pressType == 'network') {
+            this.setState({ settings1Press: false })
+            this.setState({ settings2Press: false })
+            this.setState({ settings3Press: false })
+            this.setState({ settings4Press: false })
+            this.setState({ settings5Press: true })
+        }
     }
     handelDisplayPressSections = (pressDisplayType) => {
         if (pressDisplayType == 1) {
@@ -184,15 +222,17 @@ export default class HomeScreen2 extends Component {
                     <View style={DisStyles.PrinterContentStyle}>
                         <ListItem style={DisStyles.printerItemStyle}>
                             <Radio
-                                onPress={() => this.setState({ itemSelected: 'one' })}
-                                selected={this.state.itemSelected == 'one'}
+                                key={1}
+                                onPress={() => this.setState({ printerItemSelected: 1 })}
+                                selected={this.state.printerItemSelected == 1}
                             />
                             <Text style={DisStyles.inputTitleStyle}>datecs printer</Text>
                         </ListItem >
                         <ListItem style={DisStyles.printerItemStyle}>
                             <Radio
-                                onPress={() => this.setState({ itemSelected: 'two' })}
-                                selected={this.state.itemSelected == 'two'}
+                                key={1}
+                                onPress={() => this.setState({ printerItemSelected: 2 })}
+                                selected={this.state.printerItemSelected == 2}
                             />
                             <Text style={DisStyles.inputTitleStyle}>Qts printer</Text>
                         </ListItem>
@@ -204,7 +244,21 @@ export default class HomeScreen2 extends Component {
     renderNetworkView() {
         return (
             <ScrollView style={DisStyles.cardStyle}>
-                <Text>Network View</Text>
+                <View style={DisStyles.cardTitleViewStyle}>
+                    <Text style={DisStyles.cardTitleTxtStyle}>صلاحيات المستخدم</Text>
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} > ادخال كلمة سر المضيف عند الحفظ</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} > إظهار الطاولات المضيف فقط</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >سعر المادة</Text>
+                    <TextInput style={DisStyles.inputStyle} placeholder='0' />
+                </View>
             </ScrollView>
         );
     }
@@ -214,7 +268,7 @@ export default class HomeScreen2 extends Component {
             <View>
                 <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
                     <Text style={{ marginLeft: 3 }}>
-                        <IconAntDesign name="caretleft" size={25} color='#F79122' />
+                        <IconAntDesign name="caretleft" size={20} color='#F79122' />
                     </Text>
                     <Text style={{ color: "#F79122", fontSize: 16, fontWeight: "bold" }} >خيارات العرض</Text>
                 </View>
@@ -242,6 +296,7 @@ export default class HomeScreen2 extends Component {
                     <Text style={DisStyles.inputTitleStyle} > اظهار لوحه المفاتيح</Text>
                     <CheckBox style={{ marginLeft: 15 }} />
                 </View>
+
             </View>
         );
     }
@@ -250,9 +305,9 @@ export default class HomeScreen2 extends Component {
             <View>
                 <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
                     <Text style={{ marginLeft: 3 }}>
-                        <IconAntDesign name="caretleft" size={25} color='#F79122' />
+                        <IconAntDesign name="caretleft" size={20} color='#F79122' />
                     </Text>
-                    <Text style={{ color: "#F79122", fontSize: 18, fontWeight: "bold" }} >أزرار الواجهة</Text>
+                    <Text style={{ color: "#F79122", fontSize: 16, fontWeight: "bold" }} >أزرار الواجهة</Text>
                 </View>
                 <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
                     <Text style={DisStyles.inputTitleStyle} >إحضار فاتورة</Text>
@@ -287,13 +342,141 @@ export default class HomeScreen2 extends Component {
     }
     renderDisplayView3() {
         return (
-
-            <Text style={{ textAlign: "center" }}>Diplay View 3</Text>
+            <View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={{ marginLeft: 3 }}>
+                        <IconAntDesign name="caretleft" size={20} color='#F79122' />
+                    </Text>
+                    <Text style={{ color: "#F79122", fontSize: 16, fontWeight: "bold" }} >أزرار واجهة احضار فاتورة</Text>
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} >طباعة بلوتوث</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} >طباعة كاشير</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} > طباعة حسب الموقع</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} >اغلاق الطلب</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8, justifyContent: "space-between" }}>
+                    <Text style={DisStyles.inputTitleStyle} >الغاء الامر</Text>
+                    <CheckBox style={{ marginLeft: 15 }} />
+                </View>
+            </View>
         );
     }
     renderDisplayView4() {
         return (
-            <Text style={{ textAlign: "center" }}>Diplay View 4</Text>
+            <View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={{ marginLeft: 3 }}>
+                        <IconAntDesign name="caretleft" size={20} color='#F79122' />
+                    </Text>
+                    <Text style={{ color: "#F79122", fontSize: 15, fontWeight: "bold" }} >اعدادات العرض</Text>
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >خلايا الطاولات</Text>
+                    <TextInput style={DisStyles.inputStyle} placeholder='0' />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >خلايا المجموعات</Text>
+                    <TextInput style={DisStyles.inputStyle} placeholder='0' />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >خلايا المواد</Text>
+                    <TextInput style={DisStyles.inputStyle} placeholder='0' />
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >خلايا الملاحظات</Text>
+                    <TextInput secureTextEntry style={DisStyles.inputStyle} placeholder='0' />
+                </View>
+
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >نمط العرض</Text>
+                    <View style={DisStyles.RadioContentStyle}>
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                key={2}
+                                onPress={() => this.setState({ DisplayPattern: 1 })}
+                                selected={this.state.DisplayPattern == 1}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>كلاسيكي</Text>
+                        </ListItem >
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                key={2}
+                                onPress={() => this.setState({ DisplayPattern: 2 })}
+                                selected={this.state.DisplayPattern == 2}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>Tab</Text>
+                        </ListItem>
+
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >حجم الخط</Text>
+                    <View style={DisStyles.RadioContentStyle}>
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                key={3}
+                                onPress={() => this.setState({ fontSizeType: 1 })}
+                                selected={this.state.fontSizeType == 1}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>عادي</Text>
+                        </ListItem >
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                key={3}
+                                onPress={() => this.setState({ fontSizeType: 2 })}
+                                selected={this.state.fontSizeType == 2}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>متوسط</Text>
+                        </ListItem>
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                key={3}
+                                onPress={() => this.setState({ fontSizeType: 3 })}
+                                selected={this.state.fontSizeType == 3}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>كبير</Text>
+                        </ListItem>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                    <Text style={DisStyles.inputTitleStyle} >حجم خط المواد</Text>
+                    <View style={DisStyles.RadioContentStyle}>
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+
+                                onPress={() => this.setState({ fontSizeResourcesType: 1 })}
+                                selected={this.state.fontSizeResourcesType == 1}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>عادي</Text>
+                        </ListItem >
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                onPress={() => this.setState({ fontSizeResourcesType: 2 })}
+                                selected={this.state.fontSizeResourcesType == 2}
+                            />
+                            <Text style={DisStyles.inputTitleStyle}>متوسط</Text>
+                        </ListItem>
+                        <ListItem style={DisStyles.printerItemStyle}>
+                            <Radio
+                                onPress={() => this.setState({ fontSizeResourcesType: 3 })}
+                                selected={this.state.fontSizeType == 3}
+                            />
+                            <Text style={DisStyles.fontSizeResourcesType}>كبير</Text>
+                        </ListItem>
+                    </View>
+                </View>
+            </View>
         );
     }
 
@@ -478,7 +661,7 @@ export default class HomeScreen2 extends Component {
                     }}
                 >
                     <View style={DisStyles.container}>
-                        <View elevation={5} style={DisStyles.viewContainer}>
+                        <View elevation={3} style={DisStyles.viewContainer}>
                             {this.state.navType == 'conn' ? this.renderConnectionView()
                                 : this.state.navType == 'err' ? this.renderErrorView()
                                     : this.state.navType == 'orders' ? this.renderOrdersView()
@@ -501,24 +684,24 @@ export default class HomeScreen2 extends Component {
                                 <Text style={DisStyles.styleText}>الاعدادات</Text>
                             </View>
                             <TouchableOpacity onPress={() => this.handelDisplayPressView('conn')}>
-                                <ImageBackground style={DisStyles.imgStyleBG} source={require('./assets/group3571.png')} >
-                                    <Image style={DisStyles.iconStyle} source={require('./assets/connecting.png')} />
+                                <ImageBackground style={DisStyles.imgStyleBG} source={this.state.settings1Press == true? require('./assets/nav_active.png') : require('./assets/nav_inactive.png')} >
+                                    <Image style={DisStyles.iconStyle} source={this.state.settings1Press == true? require('./assets/conn_active.png') : require('./assets/conn_active.png')} />
                                 </ImageBackground>
                             </TouchableOpacity>
 
 
                             <Image style={DisStyles.imgStyle} source={require('./assets/rectangle540.png')} />
                             <TouchableOpacity onPress={() => this.handelDisplayPressView('err')}>
-                                <ImageBackground style={DisStyles.imgStyleBG} source={require('./assets/group3571.png')} >
-                                    <Image style={DisStyles.iconStyle} source={require('./assets/error.png')} />
+                                <ImageBackground style={DisStyles.imgStyleBG} source={this.state.settings2Press == true? require('./assets/nav_active.png') : require('./assets/nav_inactive.png')} >
+                                    <Image style={DisStyles.iconStyle} source={this.state.settings2Press == true? require('./assets/error_active.png') : require('./assets/error_inactive.png')} />
                                 </ImageBackground>
                             </TouchableOpacity>
 
                             <Image style={DisStyles.imgStyle} source={require('./assets/rectangle540.png')} />
 
                             <TouchableOpacity onPress={() => this.handelDisplayPressView('display')}>
-                                <ImageBackground style={DisStyles.imgStyleBG} source={require('./assets/group3571.png')} >
-                                    <Image style={DisStyles.iconStyle} source={require('./assets/display.png')} />
+                                <ImageBackground style={DisStyles.imgStyleBG} source={this.state.settings3Press == true? require('./assets/nav_active.png') : require('./assets/nav_inactive.png')} >
+                                    <Image style={DisStyles.iconStyle} source={this.state.settings3Press == true? require('./assets/display_active.png') : require('./assets/display_inactive.png')} />
                                 </ImageBackground>
                             </TouchableOpacity>
 
@@ -526,16 +709,16 @@ export default class HomeScreen2 extends Component {
                             <Image style={DisStyles.imgStyle} source={require('./assets/rectangle540.png')} />
 
                             <TouchableOpacity onPress={() => this.handelDisplayPressView('orders')}>
-                                <ImageBackground style={DisStyles.imgStyleBG} source={require('./assets/group3571.png')} >
-                                    <Image style={DisStyles.iconStyle} source={require('./assets/connecting.png')} />
+                                <ImageBackground style={DisStyles.imgStyleBG} source={this.state.settings4Press == true? require('./assets/nav_active.png') : require('./assets/nav_inactive.png')} >
+                                    <Image style={DisStyles.iconStyle} source={this.state.settings4Press == true? require('./assets/order_active.png') : require('./assets/order_inactive.png')} />
                                 </ImageBackground>
                             </TouchableOpacity>
 
                             <Image style={DisStyles.imgStyle} source={require('./assets/rectangle540.png')} />
 
                             <TouchableOpacity onPress={() => this.handelDisplayPressView('network')}>
-                                <ImageBackground style={DisStyles.imgStyleBG} source={require('./assets/group3571.png')} >
-                                    <Image style={DisStyles.iconStyle} source={require('./assets/network.png')} />
+                                <ImageBackground style={DisStyles.imgStyleBG} source={this.state.settings5Press == true? require('./assets/nav_active.png') : require('./assets/nav_inactive.png')} >
+                                    <Image style={DisStyles.iconStyle} source={this.state.settings5Press == true? require('./assets/network_active.png') : require('./assets/network_inactive.png')} />
                                 </ImageBackground>
                             </TouchableOpacity>
 
@@ -1868,7 +2051,7 @@ const DisStyles = StyleSheet.create({
         flex: 1,
         // justifyContent: "center",
         flexDirection: "row",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E4F1FF",
         width: "75%",
         position: "absolute",
         top: "10%",
@@ -1880,12 +2063,11 @@ const DisStyles = StyleSheet.create({
     },
     viewContainer: {
         flex: 1,
-        marginTop: "5%",
+        marginTop: "1%",
         alignItems: 'center',
         marginRight: "10%",
-        height: "90%",
+        height: "95%",
         width: "100%",
-        padding: 5,
 
     },
     viewContainerBtn: {
@@ -1894,8 +2076,9 @@ const DisStyles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     viewDisplayCardContainer: {
-        justifyContent: "center",
-        width: "100%"
+        // justifyContent: "center",
+        width: "100%",
+
     },
     navStyle: {
         flex: 1,
@@ -1914,6 +2097,7 @@ const DisStyles = StyleSheet.create({
     imgStyleBG: {
         width: 85,
         height: 85,
+        zIndex: 1,
     },
 
     imgStyle: {
@@ -1953,7 +2137,7 @@ const DisStyles = StyleSheet.create({
         flexDirection: "row-reverse",
         width: "100%",
         justifyContent: "center",
-        marginBottom: 20
+        marginBottom: 10
     },
     displayTextStyleActive: {
         color: "#FFFFFF"
@@ -2000,12 +2184,9 @@ const DisStyles = StyleSheet.create({
     },
     cardDisplayStyle: {
         backgroundColor: "#ffffff",
-        width: "65%",
-        height: "50%",
+        width: "85%",
+        height: "100%",
         shadowColor: '#E4F1FF',
-        shadowRadius: 5,
-        borderRadius: 20,
-        shadowOpacity: 1,
         borderColor: "#E4F1FF",
         borderWidth: 5
     },
@@ -2013,7 +2194,7 @@ const DisStyles = StyleSheet.create({
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         backgroundColor: "#2B83A0",
-        height: "12%",
+        height: 40,
         marginBottom: 10
     }, DisplayTitleViewStyle: {
         borderTopLeftRadius: 10,
@@ -2049,6 +2230,13 @@ const DisStyles = StyleSheet.create({
     PrinterContentStyle: {
         position: "absolute",
         left: "20%",
+        flexDirection: "row",
+        alignSelf: "center",
+
+
+    }, RadioContentStyle: {
+        position: "absolute",
+        left: "10%",
         flexDirection: "row",
         alignSelf: "center",
 
