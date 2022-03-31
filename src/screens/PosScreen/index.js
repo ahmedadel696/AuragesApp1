@@ -1,8 +1,10 @@
 import { CheckBox } from 'native-base';
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, TouchableOpacity, TextInput, Button, ScrollView } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, TouchableOpacity, TextInput, Button, ScrollView, BackHandler, Alert } from 'react-native';
 import { ListItem, Container, Content, Header, Text, Radio } from 'native-base';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import SettingModal from '../SettingModal';
+import SettingsScreen from './../SettingsScreen/index';
 class PosScreen extends Component {
   constructor() {
     super();
@@ -14,8 +16,24 @@ class PosScreen extends Component {
       posView4Press: false,
       posView5Press: false,
       posView6Press: false,
+      modalSettingsVisible: false,
+
     }
   }
+
+  backAction = () => {
+    Alert.alert("Hold on!", "Are you sure you want to go back?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      // { text: "YES", onPress: () => BackHandler.exitApp() }
+      { text: "YES", onPress: () => this.props.navigation.goBack(null) }
+
+    ]);
+
+  };
   handelPosPressView = (pressType) => {
     this.setState({ posNavType: pressType });
     if (pressType == 'add') {
@@ -51,6 +69,7 @@ class PosScreen extends Component {
       this.setState({ posView6Press: false })
 
     } else if (pressType == 'settings') {
+      this.setState({ modalSettingsVisible: true })
       this.setState({ posView1Press: false })
       this.setState({ posView2Press: false })
       this.setState({ posView3Press: false })
@@ -100,7 +119,7 @@ class PosScreen extends Component {
     if (pressType == 'add') {
       return (
         <View style={styles.ViewOfMain2}>
-          <View style={{ flexDirection: "row",justifyContent:"flex-start",flexShrink:1,flexWrap:"wrap" }}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-start", flexShrink: 1, flexWrap: "wrap" }}>
             <TouchableOpacity style={styles.table_style_container}>
               <View style={styles.table_style_title_container}>
                 <Text style={styles.table_style_title_text}>مجموعه 1</Text>
@@ -204,54 +223,35 @@ class PosScreen extends Component {
       )
     } else if (pressType == 'settings') {
       return (
-        <View style={styles.ViewOfMain}>
-          <Text style={{ textAlign: "center", color: "#ffffff", fontSize: 22, fontWeight: "bold" }}>settings</Text>
-        </View>
+        <SettingsScreen />
       )
+
+
     } else if (pressType == 'out') {
-      return (
-        <View style={styles.ViewOfMain}>
-          <Text style={{ textAlign: "center", color: "#ffffff", fontSize: 22, fontWeight: "bold" }}>out</Text>
-        </View>
-      )
+      // return (
+      //   <View style={styles.ViewOfMain}>
+      //     {/* <Text style={{ textAlign: "center", color: "#ffffff", fontSize: 22, fontWeight: "bold" }}>out</Text> */}
+      //     {this.backAction}
+      //   </View>
+      // )
     }
   }
 
-  renderConnectionView() {
+  _renderListItem = (name,qty,price,comment) => {
     return (
-      <View style={styles.cardStyle}>
-        <View style={styles.cardTitleViewStyle}>
-          <Text style={styles.cardTitleTxtStyle}>اعدادات الاتصال</Text>
+      <TouchableOpacity style={{ elevation: 3, backgroundColor: "#ffffff",marginBottom:3,padding:5 }}>
+        <View style={{ flexDirection: 'row-reverse', justifyContent: "space-around",marginBottom:4,padding:5 }}>
+          <Text style={{ color: "#2B83A0", fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+          <View style={{borderWidth: 2, borderColor: "#E8E8E8", borderRadius: 4, paddingLeft: 10, paddingRight: 10}}>
+            <Text style={{ color: "#F79122", fontSize: 18, fontWeight: "bold" }}>{qty}</Text>
+          </View>
+          <Text style={{ color: "#2B83A0", fontSize: 18, fontWeight: "bold" }}>{price}</Text>
         </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >المخدم</Text>
-          <TextInput style={styles.inputStyle} placeholder='192.168.0.190' />
+        <View style={{ flexDirection: "row", justifyContent: "flex-start", flexShrink: 1, flexWrap: "wrap" }}>
+          <Text style={{ color: "#808080", fontSize: 15, fontWeight: "bold" }}>{comment}</Text>
         </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >قاعده البيانات</Text>
-          <TextInput style={styles.inputStyle} placeholder='AuragesDb01' />
-        </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >المستخدم</Text>
-          <TextInput style={styles.inputStyle} placeholder='Admin' />
-        </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >كلمه السر</Text>
-          <TextInput secureTextEntry style={styles.inputStyle} placeholder='*******' />
-        </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >البرابه</Text>
-          <TextInput style={styles.inputStyle} placeholder='1433' />
-        </View>
-        <View style={{ flexDirection: 'row-reverse', padding: 15 }}>
-          <Text style={styles.inputTitleStyle} >اتصال دائم</Text>
-          <CheckBox />
-        </View>
-        <View style={{ width: 110, marginLeft: "9%", borderRadius: 10 }}>
-          <Button color={"#2B83A0"} title='حفظ' />
-        </View>
-      </View>
-    );
+      </TouchableOpacity>
+    )
   }
 
 
@@ -266,37 +266,37 @@ class PosScreen extends Component {
             <ScrollView style={styles.posNavItemsContainer}>
               <TouchableOpacity
                 onPress={() => this.handelPosPressView('add')}
-                style={this.state.posView1Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                style={this.state.posView1Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/add_icon.png')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.handelPosPressView('bill')}
-                style={this.state.posView2Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                style={this.state.posView2Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/bill_icon.png')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.handelPosPressView('transfer')}
-                style={this.state.posView3Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                style={this.state.posView3Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/transfer_icon.png')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.handelPosPressView('lang')}
-                style={this.state.posView4Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                style={this.state.posView4Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/lang_icon.png')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.handelPosPressView('settings')}
-                style={this.state.posView5Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                style={this.state.posView5Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/settings_icon.png')} />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => this.handelPosPressView('out')}
-                style={this.state.posView6Press == true?styles.posNavItemStyleActive:styles.posNavItemStyle}
+                onPress={() => this.backAction()}
+                style={this.state.posView6Press == true ? styles.posNavItemStyleActive : styles.posNavItemStyle}
               >
                 <Image style={styles.posNavIconStyle} source={require('./assets/out_icon.png')} />
               </TouchableOpacity>
@@ -334,7 +334,10 @@ class PosScreen extends Component {
                 </TouchableOpacity>
               </View>
               <ScrollView>
-                <View style={{ padding: 10, borderWidth: 1, margin: 3 }}>
+                {this._renderListItem('دجاج المندى',2,70.5,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {this._renderListItem('فرخه مشويه',3,50.5,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {this._renderListItem('ارز بالخلطه',4,30,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {/* <View style={{ padding: 10, borderWidth: 1, margin: 3 }}>
                   <Text style={{ textAlign: "center" }}>Item1</Text>
                 </View>
                 <View style={{ padding: 10, borderWidth: 1, margin: 3 }}>
@@ -348,7 +351,7 @@ class PosScreen extends Component {
                 </View>
                 <View style={{ padding: 10, borderWidth: 1, margin: 3 }}>
                   <Text style={{ textAlign: "center" }}>Item5</Text>
-                </View>
+                </View> */}
               </ScrollView>
             </View>
             <View style={styles.posListView2}>
@@ -518,7 +521,7 @@ const styles = StyleSheet.create({
   },
   posListView1: {
     height: "75%",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#E4F1FF",
 
   },
   posListView2: {
@@ -545,29 +548,29 @@ const styles = StyleSheet.create({
 
     elevation: 4
   },
-  table_style_container:{
-    width:125,
+  table_style_container: {
+    width: 125,
     elevation: 4,
-    margin:6,
-    marginBottom:15
+    margin: 6,
+    marginBottom: 15
   },
   table_style_title_container: {
-    backgroundColor:"#F79122",
-    alignItems:"center"
+    backgroundColor: "#F79122",
+    alignItems: "center"
   },
-  table_style_title_text:{
-    color:"#ffffff",
-    fontSize:18,
-    fontWeight:"bold",
-    textAlign:"center",
-    padding:3
+  table_style_title_text: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 3
   },
   table_style_card: {
-    backgroundColor:"#ffffff",
-    paddingLeft:30,
-    paddingBottom:20,
-    paddingTop:20,
-    
+    backgroundColor: "#ffffff",
+    paddingLeft: 30,
+    paddingBottom: 20,
+    paddingTop: 20,
+
   },
   posTblIconStyle: {
 

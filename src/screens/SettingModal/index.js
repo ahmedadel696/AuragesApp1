@@ -2,7 +2,7 @@ import { CheckBox, ListItem, Radio } from 'native-base';
 import React, { Component } from 'react';
 import {View, StyleSheet, Modal, ScrollView, Text, TextInput, TouchableOpacity, Image, ImageBackground, Button} from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-class SettingsScreen extends Component {
+class SettingModal extends Component {
     constructor(props){
         super(props);
 
@@ -462,6 +462,16 @@ class SettingsScreen extends Component {
 
     render() {
         return (
+            <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.props.modalSettingsVisible}
+
+            onRequestClose={() => {
+                // this.setState({ modalSettingsVisible: false })
+                this.props.setSettingViewFalse
+            }}
+        >
             <View style={DisStyles.container}>
                 <View elevation={3} style={DisStyles.viewContainer}>
                     {this.state.navType == 'conn' ? this.renderConnectionView()
@@ -473,10 +483,11 @@ class SettingsScreen extends Component {
                         <View style={{ marginLeft: "5%", marginRight: "5%", width: 100 }}>
                             <Button color={"#2B83A0"} title='حفظ' />
                         </View>
-                        {/* <View style={{ marginLeft: "5%", marginRight: "5%", width: 100 }}>
+                        <View style={{ marginLeft: "5%", marginRight: "5%", width: 100 }}>
+                            {/* <Button onPress={() => this.setState({ modalSettingsVisible: false })} color={"#2B83A0"} title='خروج' /> */}
                             <Button onPress={this.props.setSettingViewFalse } color={"#2B83A0"} title='خروج' />
 
-                        </View> */}
+                        </View>
 
                     </View>
                 </View>
@@ -527,7 +538,7 @@ class SettingsScreen extends Component {
 
                 </View>
             </View>
-       
+        </Modal>
         );
     }
 }
@@ -537,10 +548,10 @@ const DisStyles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         backgroundColor: "#E4F1FF",
-        width: "100%",
+        width: "75%",
         position: "absolute",
-        top: "18%",
-        left: "3%",
+        top: "10%",
+        left: "20%",
         right: "20%",
         height: "70%",
         borderRadius: 20
@@ -561,6 +572,7 @@ const DisStyles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     viewDisplayCardContainer: {
+        // justifyContent: "center",
         width: "100%",
 
     },
@@ -646,7 +658,7 @@ const DisStyles = StyleSheet.create({
     },
     cardStyle: {
         backgroundColor: "#ffffff",
-        width: "75%",
+        width: "65%",
         height: "30%",
         shadowColor: '#E4F1FF',
         shadowRadius: 5,
@@ -733,4 +745,4 @@ const DisStyles = StyleSheet.create({
 
 
 })
-export default SettingsScreen;
+export default SettingModal;
