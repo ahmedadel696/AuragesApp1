@@ -234,15 +234,111 @@ class PosScreen extends Component {
       //     {this.backAction}
       //   </View>
       // )
+    } else if (pressType == 'item') {
+      return (
+        <View style={styles.ViewOfMain2}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-start", flexShrink: 1, flexWrap: "wrap" }}>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item_style_container}>
+              {/* <View style={styles.table_style_card}> */}
+                <Image style={styles.posTblIconStyle} source={require('./assets/item_1.png')} />
+              {/* </View> */}
+              <View style={styles.item_style_title_container}>
+                <Text style={styles.item_style_title_text}>دجاج المندى</Text>
+              </View>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+      )
     }
   }
 
-  _renderListItem = (name,qty,price,comment) => {
+  _renderListItem = (name, qty, price, comment) => {
     return (
-      <TouchableOpacity style={{ elevation: 3, backgroundColor: "#ffffff",marginBottom:3,padding:5 }}>
-        <View style={{ flexDirection: 'row-reverse', justifyContent: "space-around",marginBottom:4,padding:5 }}>
+      <TouchableOpacity style={{ elevation: 3, backgroundColor: "#ffffff", marginBottom: 3, padding: 5 }}>
+        <View style={{ flexDirection: 'row-reverse', justifyContent: "space-around", marginBottom: 4, padding: 5 }}>
           <Text style={{ color: "#2B83A0", fontSize: 18, fontWeight: "bold" }}>{name}</Text>
-          <View style={{borderWidth: 2, borderColor: "#E8E8E8", borderRadius: 4, paddingLeft: 10, paddingRight: 10}}>
+          <View style={{ borderWidth: 2, borderColor: "#E8E8E8", borderRadius: 4, paddingLeft: 10, paddingRight: 10 }}>
             <Text style={{ color: "#F79122", fontSize: 18, fontWeight: "bold" }}>{qty}</Text>
           </View>
           <Text style={{ color: "#2B83A0", fontSize: 18, fontWeight: "bold" }}>{price}</Text>
@@ -334,9 +430,9 @@ class PosScreen extends Component {
                 </TouchableOpacity>
               </View>
               <ScrollView>
-                {this._renderListItem('دجاج المندى',2,70.5,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
-                {this._renderListItem('فرخه مشويه',3,50.5,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
-                {this._renderListItem('ارز بالخلطه',4,30,'1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {this._renderListItem('دجاج المندى', 2, 70.5, '1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {this._renderListItem('فرخه مشويه', 3, 50.5, '1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
+                {this._renderListItem('ارز بالخلطه', 4, 30, '1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا / 1 كولا ')}
                 {/* <View style={{ padding: 10, borderWidth: 1, margin: 3 }}>
                   <Text style={{ textAlign: "center" }}>Item1</Text>
                 </View>
@@ -395,7 +491,9 @@ class PosScreen extends Component {
           </View>
         </View>
         <ScrollView horizontal style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.posBottomViewItemStyle}>
+          <TouchableOpacity
+            onPress={() => this.handelPosPressView('item')}
+            style={styles.posBottomViewItemStyle}>
             <Text style={styles.posBottomViewItemTextStyle}>المشروبات</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.posBottomViewItemStyle}>
@@ -550,13 +648,35 @@ const styles = StyleSheet.create({
   },
   table_style_container: {
     width: 125,
-    elevation: 4,
+    elevation: 7,
     margin: 6,
     marginBottom: 15
+  },
+  item_style_container: {
+    width: 125,
+    elevation: 7,
+    margin: 6,
+    marginBottom: 15,
+    shadowColor: '#333',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   table_style_title_container: {
     backgroundColor: "#F79122",
     alignItems: "center"
+  },
+  item_style_title_container: {
+    backgroundColor: "#ffffff",
+    alignItems: "center"
+  },
+  item_style_title_text: {
+    color: "#2B83A0",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 3
   },
   table_style_title_text: {
     color: "#ffffff",
